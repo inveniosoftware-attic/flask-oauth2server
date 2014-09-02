@@ -5,5 +5,6 @@
 # modify it under the terms of the Revised BSD License; see LICENSE
 # file for more details.
 
-coverage run setup.py test
-coverage report -m
+pep257 --ignore=D100,D101,D102,D103 flask_oauth2server
+sphinx-build -qnNW docs docs/_build/html
+python setup.py test

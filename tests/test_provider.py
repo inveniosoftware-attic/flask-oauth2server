@@ -25,7 +25,7 @@ try:
 except ImportError:
     from urllib.parse import urlparse
 
-from .helpers import create_client
+from helpers import create_client
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -429,7 +429,8 @@ class OAuth2ProviderTestCase(InvenioTestCase):
             self.assertStatus(r, 302)
             # Important - access token exists in URI fragment and must not be
             # sent to the client.
-            next_url, data = self.parse_redirect(r.location, parse_fragment=True)
+            next_url, data = self.parse_redirect(r.location,
+                                                 parse_fragment=True)
 
             assert data['access_token']
             assert data['token_type'] == 'Bearer'

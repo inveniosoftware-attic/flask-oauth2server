@@ -36,8 +36,4 @@ Testing
 =======
 Running the test suite is as simple as: ::
 
-    python setup.py test
-
-or, to also show code coverage: ::
-
     ./run-tests.sh

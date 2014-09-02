@@ -8,15 +8,43 @@
 # file for more details.
 
 from setuptools import setup, find_packages
+from setuptools.command.test import test as TestCommand
 import os
+import sys
 import re
 
+
+class PyTest(TestCommand):
+    user_options = [('pytest-args=', 'a', 'Arguments to pass to py.test')]
+
+    def initialize_options(self):
+        TestCommand.initialize_options(self)
+        try:
+            from ConfigParser import ConfigParser
+        except ImportError:
+            from configparser import ConfigParser
+        config = ConfigParser()
+        config.read("pytest.ini")
+        self.pytest_args = config.get("pytest", "addopts").split(" ")
+
+    def finalize_options(self):
+        TestCommand.finalize_options(self)
+        self.test_args = []
+        self.test_suite = True
+
+    def run_tests(self):
+        # import here, cause outside the eggs aren't loaded
+        import pytest
+        errno = pytest.main(self.pytest_args)
+        sys.exit(errno)
+
 # Get the version string.  Cannot be done with import!
-with open(os.path.join('flask_oauth2server', 'version.py'), 'rt') as f:
+with open(os.path.join('flask_oauth2server', 'version.py'), 'r') as f:
     version = re.search(
         '__version__\s*=\s*"(?P<version>.*)"\n',
         f.read()
     ).group('version')
+
 
 setup(
     name='Flask-OAuth2Server',
@@ -37,12 +65,23 @@ setup(
         'six',
         'Flask-OAuthlib>=0.6.0',
         'Flask-Registry>=0.2.0',
+        'Flask-Breadcrumbs>=0.1.0',
+        'Flask-Menu>=0.1.0',
         "Flask-Login>=0.2.7",
         "Flask-WTF>=0.10.0",
         "WTForms>=2.0",
         "wtforms-alchemy>=0.12.6",
         "SQLAlchemy>=0.8.3",
         "SQLAlchemy-Utils>=0.23.5,<0.24",
+    ],
+    tests_require=[
+        'pytest-cache>=1.0',
+        'pytest-cov>=1.8.0',
+        'pytest-pep8>=1.0.6',
+        'pytest>=2.6.1',
+        'coverage',
+        'mock',
+        'pep257',
     ],
     classifiers=[
         'Environment :: Web Environment',
@@ -61,6 +100,5 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Development Status :: 5 - Production/Stable',
     ],
-    test_suite='nose.collector',
-    tests_require=['nose', 'coverage'],
+    cmdclass={'test': PyTest},
 )

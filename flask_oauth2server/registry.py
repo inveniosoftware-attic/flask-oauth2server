@@ -15,9 +15,7 @@ from .models import Scope
 
 class ScopesRegistry(DictRegistry):
 
-    """
-    Registry for OAuth scopes.
-    """
+    """Registry for OAuth scopes."""
 
     def register(self, scope):
         """ Register an OAuth scope. """

@@ -7,7 +7,7 @@
 # modify it under the terms of the Revised BSD License; see LICENSE
 # file for more details.
 
-""" Forms for generating access tokens and clients. """
+"""Forms for generating access tokens and clients."""
 
 from oauthlib.oauth2.rfc6749.errors import InsecureTransportError, \
     InvalidRedirectURIError

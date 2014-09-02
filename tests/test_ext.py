@@ -9,7 +9,7 @@
 
 from __future__ import absolute_import
 
-from .helpers import FlaskTestCase
+from helpers import FlaskTestCase
 from flask_oauth2server import OAuth2Server
 
 

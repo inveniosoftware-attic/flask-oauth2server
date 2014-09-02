@@ -7,8 +7,7 @@
 # modify it under the terms of the Revised BSD License; see LICENSE
 # file for more details.
 
-"""
-Version information for Flask-OAuth2Server
+"""Version information for Flask-OAuth2Server.
 
 This file is imported by ``flask_oauth2server.__init__``, and parsed by
 ``setup.py`` as well as ``docs/conf.py``.
@@ -17,4 +16,4 @@ This file is imported by ``flask_oauth2server.__init__``, and parsed by
 # Do not change the format of this next line. Doing so risks breaking
 # setup.py and docs/conf.py
 
-__version__ = "0.1"
+__version__ = "0.1.0.dev0"

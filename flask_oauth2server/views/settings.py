@@ -7,9 +7,7 @@
 # modify it under the terms of the Revised BSD License; see LICENSE
 # file for more details.
 
-"""
-OAuth Server Settings Blueprint
-"""
+"""OAuth Server Settings Blueprint."""
 
 from __future__ import absolute_import
 from functools import wraps
@@ -42,9 +40,7 @@ blueprint = Blueprint(
 # Decorator
 #
 def client_getter():
-    """
-    Decorator to retrieve Client object and check user permission
-    """
+    """Decorator to retrieve Client object and check user permission."""
     def wrapper(f):
         @wraps(f)
         def decorated(*args, **kwargs):
@@ -65,9 +61,7 @@ def client_getter():
 
 
 def token_getter(is_personal=True, is_internal=False):
-    """
-    Decorator to retrieve Token object and check user permission
-    """
+    """Decorator to retrieve Token object and check user permission."""
     def wrapper(f):
         @wraps(f)
         def decorated(*args, **kwargs):
