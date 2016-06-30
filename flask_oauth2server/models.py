@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of Flask-OAuth2Server
-# Copyright (C) 2014 CERN.
+# Copyright (C) 2014, 2016 CERN.
 #
 # Flask-OAuth2Server is free software; you can redistribute it and/or
 # modify it under the terms of the Revised BSD License; see LICENSE
@@ -26,7 +26,6 @@ from .errors import ScopeDoesNotExists
 
 
 class OAuthUserProxy(object):
-
     """Proxy object to an Invenio User."""
 
     def __init__(self, user):
@@ -37,9 +36,11 @@ class OAuthUserProxy(object):
         return getattr(self._user, name)
 
     def __getstate__(self):
+        """Get state."""
         return self.id
 
     def __setstate__(self, state):
+        """Set state."""
         self._user = UserInfo(state)
 
     @property
@@ -63,7 +64,6 @@ class Scope(object):
 
 
 class Client(db.Model):
-
     """A client is the app which want to use the resource of a user.
 
     It is suggested that the client is registered by a user on your site, but
@@ -227,7 +227,6 @@ class Client(db.Model):
 
 
 class Token(db.Model):
-
     """A bearer token is the final token that can be used by the client."""
 
     __tablename__ = 'oauth2TOKEN'

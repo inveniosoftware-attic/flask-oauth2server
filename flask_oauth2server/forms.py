@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of Flask-OAuth2Server
-# Copyright (C) 2014 CERN.
+# Copyright (C) 2014, 2016 CERN.
 #
 # Flask-OAuth2Server is free software; you can redistribute it and/or
 # modify it under the terms of the Revised BSD License; see LICENSE
@@ -23,7 +23,7 @@ from .validators import validate_redirect_uri
 # Widget
 #
 def scopes_multi_checkbox(field, **kwargs):
-    """ Render multi checkbox widget. """
+    """Render multi checkbox widget."""
     kwargs.setdefault('type', 'checkbox')
     field_id = kwargs.pop('id', field.id)
 
@@ -59,8 +59,7 @@ def scopes_multi_checkbox(field, **kwargs):
 # Redirect URI field
 #
 class RedirectURIField(fields.TextAreaField):
-
-    """ Process redirect URI field data. """
+    """Process redirect URI field data."""
 
     def process_formdata(self, valuelist):
         if valuelist:
@@ -74,8 +73,7 @@ class RedirectURIField(fields.TextAreaField):
 
 
 class RedirectURIValidator(object):
-
-    """ Validate if redirect URIs. """
+    """Validate if redirect URIs."""
 
     def __call__(self, form, field):
         errors = []

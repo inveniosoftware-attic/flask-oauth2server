@@ -89,12 +89,12 @@ class OAuth2ProviderTestCase(InvenioTestCase):
 
         # Create needed objects
         u = User(
-            email='info@invenio-software.org', nickname='tester'
+            email='info@inveniosoftware.org', nickname='tester'
         )
         u.password = "tester"
 
         u2 = User(
-            email='abuse@invenio-software.org', nickname='tester2'
+            email='abuse@inveniosoftware.org', nickname='tester2'
         )
         u2.password = "tester2"
 
@@ -592,7 +592,7 @@ class OAuth2ProviderTestCase(InvenioTestCase):
             data=dict(
                 name='Test',
                 description='Test description',
-                website='http://invenio-software.org',
+                website='http://inveniosoftware.org',
                 redirect_uris="http://localhost/oauth/authorized/"
             )
         )
@@ -605,7 +605,7 @@ class OAuth2ProviderTestCase(InvenioTestCase):
             data=dict(
                 name='Test',
                 description='Test description',
-                website='http://invenio-software.org',
+                website='http://inveniosoftware.org',
                 redirect_uris="http://example.org/oauth/authorized/"
             )
         )
@@ -618,7 +618,7 @@ class OAuth2ProviderTestCase(InvenioTestCase):
             data=dict(
                 name='Test',
                 description='Test description',
-                website='http://invenio-software.org',
+                website='http://inveniosoftware.org',
                 redirect_uris="https://example.org/oauth/authorized/\n"
                               "http://localhost:4000/oauth/authorized/"
             )

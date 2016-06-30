@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 #
 # This file is part of Flask-OAuth2Server
-# Copyright (C) 2014 CERN.
+# Copyright (C) 2014, 2016 CERN.
 #
 # Flask-OAuth2Server is free software; you can redistribute it and/or
 # modify it under the terms of the Revised BSD License; see LICENSE
@@ -12,31 +12,6 @@ from setuptools.command.test import test as TestCommand
 import os
 import sys
 import re
-
-
-class PyTest(TestCommand):
-    user_options = [('pytest-args=', 'a', 'Arguments to pass to py.test')]
-
-    def initialize_options(self):
-        TestCommand.initialize_options(self)
-        try:
-            from ConfigParser import ConfigParser
-        except ImportError:
-            from configparser import ConfigParser
-        config = ConfigParser()
-        config.read("pytest.ini")
-        self.pytest_args = config.get("pytest", "addopts").split(" ")
-
-    def finalize_options(self):
-        TestCommand.finalize_options(self)
-        self.test_args = []
-        self.test_suite = True
-
-    def run_tests(self):
-        # import here, cause outside the eggs aren't loaded
-        import pytest
-        errno = pytest.main(self.pytest_args)
-        sys.exit(errno)
 
 # Get the version string.  Cannot be done with import!
 with open(os.path.join('flask_oauth2server', 'version.py'), 'r') as f:
@@ -52,7 +27,7 @@ setup(
     url='http://github.com/inveniosoftware/flask-oauth2server/',
     license='BSD',
     author='Invenio collaboration',
-    author_email='info@invenio-software.org',
+    author_email='info@inveniosoftware.org',
     description='Flask-OAuth2Server allows you to quickly add an OAuth2 '
                 'provider to your Flask application.',
     long_description=open('README.rst').read(),
@@ -74,14 +49,18 @@ setup(
         "SQLAlchemy>=0.8.3",
         "SQLAlchemy-Utils>=0.23.5,<0.24",
     ],
+    setup_requires=[
+        'pytest-runner>=2.7.0',
+    ],
     tests_require=[
         'pytest-cache>=1.0',
         'pytest-cov>=1.8.0',
         'pytest-pep8>=1.0.6',
-        'pytest>=2.6.1',
+        'pytest-runner>=2.7.0',
+        'pytest>=2.8.0',
         'coverage',
         'mock',
-        'pep257',
+        'pydocstyle>=1.0.0',
     ],
     classifiers=[
         'Environment :: Web Environment',
@@ -100,5 +79,4 @@ setup(
         'Programming Language :: Python :: 3.4',
         'Development Status :: 5 - Production/Stable',
     ],
-    cmdclass={'test': PyTest},
 )
